@@ -7,7 +7,13 @@
   <version>1.0.0</version>
   <name>mcunittests</name>
   <description>A unit test library for springboot project.</description>
-  <url>http://github.com/Json031/MCUnitTests</url>
+  <url>https://github.com/Json031/mcunittests</url>
+  <scm>
+    <url>https://github.com/Json031/mcunittests</url>
+    <connection>scm:git:git://github.com/Json031/mcunittests.git</connection>
+    <developerConnection>scm:git:ssh://github.com:Json031/mcunittests.git</developerConnection>
+  </scm>
+
   <dependencies>
       <dependency>
           <groupId>junit</groupId>
@@ -33,7 +39,7 @@
           <scope>compile</scope>
       </dependency>
   </dependencies>
-    <licenses>
+  <licenses>
     <license>
       <name>MIT License</name>
       <url>file://${project.basedir}/LICENSE</url>
@@ -41,17 +47,87 @@
     </license>
   </licenses>
   <build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.10.1</version>
-            <configuration>
-                <source>20</source> <!-- 使用 JDK 20 -->
-                <target>20</target> <!-- 使用 JDK 20 -->
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <version>3.10.1</version>
+              <configuration>
+                  <source>20</source> <!-- 使用 JDK 20 -->
+                  <target>20</target> <!-- 使用 JDK 20 -->
+              </configuration>
+          </plugin>
+          <!-- 源码与 Javadoc JAR 生成 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.6.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- GPG 签名 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 上传并发布到 Nexus Central -->
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.13</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+      </plugins>
+  </build>
+  <developers>
+    <developer>
+      <id>Json031</id>
+      <name>MorganChen</name>
+      <email>cjfmail@foxmail.com</email>
+    </developer>
+  </developers>
+
+  <distributionManagement>
+      <snapshotRepository>
+          <id>ossrh</id>
+          <url>https://central.sonatype.com/</url>
+      </snapshotRepository>
+  </distributionManagement>
 </project>
