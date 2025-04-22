@@ -6,7 +6,7 @@
   <packaging>jar</packaging>
   <version>1.0.0</version>
   <name>mcunittests</name>
-  <description>A unit test library for java.</description>
+  <description>A unit test library for springboot project.</description>
   <url>http://github.com/Json031/MCUnitTests</url>
   <dependencies>
       <dependency>
