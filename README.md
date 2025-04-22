@@ -1,7 +1,20 @@
 # mcunittests
-A unit test library for SpringBoot project.
+mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可下分发的开源项目。源代码可以在GitHub上找到。
+<br>mcunittests is a unit test library for SpringBoot project, and is an open source project distributed under the liberal MIT license. The source code is available on GitHub.
 
-## Example Codes
+# 最新版本 Latest version
+
+```xml
+
+<dependency>
+    <groupId>io.github.json031</groupId>
+    <artifactId>mcunittests</artifactId>
+    <version>1.0.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+## 示例代码 Example Codes
 ```
 import io.github.json031.MCApiTests;
 import org.junit.jupiter.api.Test;
