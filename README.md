@@ -10,6 +10,7 @@ mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可�
 在项目的 `pom.xml` 文件中，添加 GitHub Packages 仓库配置：
 
 ```xml
+
 <repositories>
   <repository>
     <id>github</id>
@@ -17,8 +18,11 @@ mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可�
     <url>https://maven.pkg.github.com/json031/mcunittests</url>
   </repository>
 </repositories>
+```
+
 添加依赖
 在 pom.xml 中添加以下依赖：
+
 ```
 <dependencies>
   <dependency>
@@ -28,6 +32,7 @@ mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可�
   </dependency>
 </dependencies>
 ```
+
 配置认证
 在 ~/.m2/settings.xml 中，配置 GitHub 的认证信息：
 ```
@@ -42,7 +47,6 @@ mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可�
 
 * 通过maven安装
 ```xml
-
 <dependency>
 	<groupId>io.github.json031</groupId>
 	<artifactId>mcunittests</artifactId>
