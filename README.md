@@ -5,7 +5,42 @@ mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可�
 <br>mcunittests is a unit test library for SpringBoot project, and is an open source project distributed under the liberal MIT license. The source code is available on GitHub.
 
 # 最新版本 Latest version
+* 通过GitHub Packages安装
+ 配置 Maven 仓库
+在项目的 `pom.xml` 文件中，添加 GitHub Packages 仓库配置：
 
+```xml
+<repositories>
+  <repository>
+    <id>github</id>
+    <name>GitHub Json031 Apache Maven Packages</name>
+    <url>https://maven.pkg.github.com/json031/mcunittests</url>
+  </repository>
+</repositories>
+添加依赖
+在 pom.xml 中添加以下依赖：
+```
+<dependencies>
+  <dependency>
+    <groupId>io.github.json031</groupId>
+    <artifactId>mcunittests</artifactId>
+    <version>1.0.1</version>
+  </dependency>
+</dependencies>
+```
+配置认证
+在 ~/.m2/settings.xml 中，配置 GitHub 的认证信息：
+```
+<servers>
+  <server>
+    <id>github</id>
+    <username>your-github-username</username>
+    <password>${env.GITHUB_TOKEN}</password>
+  </server>
+</servers>
+```
+
+* 通过maven安装
 ```xml
 
 <dependency>
