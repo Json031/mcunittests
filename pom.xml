@@ -5,7 +5,7 @@
   <groupId>io.github.json031</groupId>
   <artifactId>mcunittests</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <name>mcunittests</name>
   <description>mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可下分发的开源项目</description>
   <url>https://github.com/Json031/mcunittests</url>
@@ -60,15 +60,38 @@
 
   <!-- 只保留 GitHub Packages 配置 -->
   <distributionManagement>
+<!--    <repository>-->
+<!--      <id>github</id>-->
+<!--      <name>GitHub Json031 Apache Maven Packages</name>-->
+<!--      <url>https://maven.pkg.github.com/json031/mcunittests</url>-->
+<!--    </repository>-->
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
     <repository>
-      <id>github</id>
-      <name>GitHub Json031 Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/json031/mcunittests</url>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
 
   <build>
     <plugins>
+      <!-- GPG 插件：用于签名 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
