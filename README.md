@@ -28,7 +28,9 @@ class YourProjectApplicationTests {
 
 	@Test
 	public void testExampleApi() {
-		String apiUrl = "http://localhost:8088/json031/c/2a-d7b4-8005-a16f-8a95f07011df?id=2"; // Replace with actual path
+		// 测试api接口地址 Replace with actual path
+		String apiUrl = "http://localhost:8088/json031/c/2a-d7b4-8005-a16f-8a95f07011df?id=2"; 
+		//期望最慢响应时间 Expected slowest response time
 		long timeoutSeconds = 5;
 		mcApiTests.assertApiRespondsWithinTimeout(apiUrl, timeoutSeconds);
 	}
