@@ -7,11 +7,12 @@ mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可�
 ```xml
 
 <dependency>
-    <groupId>io.github.json031</groupId>
-    <artifactId>mcunittests</artifactId>
-    <version>1.0.0</version>
-    <scope>test</scope>
+	<groupId>io.github.json031</groupId>
+	<artifactId>mcunittests</artifactId>
+	<version>1.0.1</version>
+	<scope>test</scope>
 </dependency>
+
 ```
 
 ## 示例代码 Example Codes
@@ -27,7 +28,9 @@ class YourProjectApplicationTests {
 
 	@Test
 	public void testExampleApi() {
-		String apiUrl = "http://localhost:8088/json031/c/2a-d7b4-8005-a16f-8a95f07011df?id=2"; // Replace with actual path
+		// 测试api接口地址 Replace with actual path
+		String apiUrl = "http://localhost:8088/json031/c/2a-d7b4-8005-a16f-8a95f07011df?id=2"; 
+		//期望最慢响应时间 Expected slowest response time
 		long timeoutSeconds = 5;
 		mcApiTests.assertApiRespondsWithinTimeout(apiUrl, timeoutSeconds);
 	}
