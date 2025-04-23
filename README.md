@@ -7,11 +7,12 @@ mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可�
 ```xml
 
 <dependency>
-    <groupId>io.github.json031</groupId>
-    <artifactId>mcunittests</artifactId>
-    <version>1.0.0</version>
-    <scope>test</scope>
+	<groupId>io.github.json031</groupId>
+	<artifactId>mcunittests</artifactId>
+	<version>1.0.1</version>
+	<scope>test</scope>
 </dependency>
+
 ```
 
 ## 示例代码 Example Codes
