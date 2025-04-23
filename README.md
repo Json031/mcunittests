@@ -7,16 +7,14 @@ mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可�
 # 最新版本 Latest version
 * 通过GitHub Packages安装
  配置 Maven 仓库
-在项目的 `pom.xml` 文件中，添加 GitHub Packages 仓库配置：
+在项目的 `pom.xml` 文件的repositories中，添加 GitHub Packages 仓库配置：
 
 ```xml
-<repositories>
   <repository>
     <id>github</id>
     <name>GitHub Json031 Apache Maven Packages</name>
     <url>https://maven.pkg.github.com/json031/mcunittests</url>
   </repository>
-</repositories>
 ```
 
 添加依赖
