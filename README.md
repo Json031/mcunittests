@@ -7,7 +7,7 @@ mcunittests是SpringBoot项目的一个单元测试库，支持API接口自动�
 <br>Mcunittests is a unit testing library for the SpringBoot project that supports automated unit testing of API interfaces and high concurrency unit testing of API interfaces.
 
 # 最新版本 Latest version
-* 通过maven安装 Install through Maven
+* 方式1️⃣通过maven安装 Install through Maven
 ```xml
 <dependency>
 	<groupId>io.github.json031</groupId>
@@ -18,8 +18,10 @@ mcunittests是SpringBoot项目的一个单元测试库，支持API接口自动�
 
 ```
 
-* 通过GitHub Packages安装 Install through GitHub Packages
-配置 Maven 仓库，在项目的 `pom.xml` 文件的repositories中，添加 GitHub Packages 仓库配置：
+<details>
+  <summary>方式2️⃣通过GitHub Packages安装 Install through GitHub Packages</summary>
+
+* 配置 Maven 仓库，在项目的 `pom.xml` 文件的repositories中，添加 GitHub Packages 仓库配置：
 <br>Configure the Maven repository and add the GitHub Packages repository configuration in the repositories of the project's pom. xml file
 
 ```xml
@@ -30,7 +32,7 @@ mcunittests是SpringBoot项目的一个单元测试库，支持API接口自动�
   </repository>
 ```
 
-添加依赖 Add Dependency
+* 添加依赖 Add Dependency
 在 pom.xml 中添加以下依赖：
 <br>Add the following dependencies in pom.xml:
 
@@ -42,7 +44,7 @@ mcunittests是SpringBoot项目的一个单元测试库，支持API接口自动�
   </dependency>
 ```
 
-配置认证 Configuration authentication
+* 配置认证 Configuration authentication
 在 ~/.m2/settings.xml 的servers中，配置 GitHub 的认证信息：
 <br>In ~/.m2/settings.xml servers tag, configure GitHub authentication information:
 
@@ -53,6 +55,8 @@ mcunittests是SpringBoot项目的一个单元测试库，支持API接口自动�
     <password>your-github-TOKEN</password>
   </server>
 ```
+
+</details>
 
 ## 示例代码 Example Codes
 ```
