@@ -19,8 +19,7 @@ mcunittests是SpringBoot项目的一个单元测试库，支持API接口自动�
 ```
 
 * 通过GitHub Packages安装
- 配置 Maven 仓库
-在项目的 `pom.xml` 文件的repositories中，添加 GitHub Packages 仓库配置：
+配置 Maven 仓库，在项目的 `pom.xml` 文件的repositories中，添加 GitHub Packages 仓库配置：
 
 ```xml
   <repository>
