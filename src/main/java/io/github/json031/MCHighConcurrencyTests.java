@@ -2,10 +2,12 @@ package io.github.json031;
 
 import io.github.json031.JavaBean.HighConcurrencyResult;
 import org.junit.jupiter.api.Assertions;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
@@ -21,7 +23,13 @@ public class MCHighConcurrencyTests {
      * @param threadCount 并发线程数
      * @return 统计结果
      */
-    public HighConcurrencyResult highConcurrencyTest(String url, int threadCount, long timeoutMillis, boolean verbose) {
+    public HighConcurrencyResult highConcurrencyTest(String url,
+                                                     int threadCount,
+                                                     HttpMethod method,
+                                                     Map<String, Object> params,
+                                                     Map<String, String> headers,
+                                                     long timeoutMillis,
+                                                     boolean verbose) {
         ExecutorService executor = Executors.newFixedThreadPool(threadCount);
         List<Future<Long>> futures = new ArrayList<>();
         AtomicInteger successCount = new AtomicInteger();
@@ -31,7 +39,7 @@ public class MCHighConcurrencyTests {
             futures.add(executor.submit(() -> {
                 long start = System.nanoTime();
                 try {
-                    long rsptime = this.mcApiTests.assertApiRespondsWithinTimeoutMillis(url, timeoutMillis, verbose); // 执行请求
+                    long rsptime = this.mcApiTests.assertApiRespondsWithinTimeoutMillis(url, method, params, headers, timeoutMillis, verbose); // 执行请求
                     System.out.println("API Response time: " + rsptime);
                     if (rsptime >= timeoutMillis) {
                         failCount.incrementAndGet();

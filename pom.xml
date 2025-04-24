@@ -5,7 +5,7 @@
   <groupId>io.github.json031</groupId>
   <artifactId>mcunittests</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.3</version>
+  <version>1.0.5</version>
   <name>mcunittests</name>
   <description>mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可下分发的开源项目</description>
   <url>https://github.com/Json031/mcunittests</url>
