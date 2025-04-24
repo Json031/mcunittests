@@ -21,15 +21,41 @@ public class MCHighConcurrencyTests {
      * 运行并发测试
      * @param url        请求地址
      * @param threadCount 并发线程数
+     * @param method        请求方式（GET / POST）
+     * @param params        请求参数（POST body 或 GET 查询参数）
+     * @param headers       请求头（可选）
+     * @param timeoutSeconds 最大允许超时时间（秒）
+     * @param verbose       是否打印响应
      * @return 统计结果
      */
-    public HighConcurrencyResult highConcurrencyTest(String url,
-                                                     int threadCount,
-                                                     HttpMethod method,
-                                                     Map<String, Object> params,
-                                                     Map<String, String> headers,
-                                                     long timeoutMillis,
-                                                     boolean verbose) {
+    public HighConcurrencyResult highConcurrencyTestWithTimeoutSeconds(String url,
+                                                                       int threadCount,
+                                                                       HttpMethod method,
+                                                                       Map<String, Object> params,
+                                                                       Map<String, String> headers,
+                                                                       long timeoutSeconds,
+                                                                       boolean verbose) {
+        return this.highConcurrencyTestWithTimeoutMillis(url, threadCount, method, params, headers, timeoutSeconds, verbose);
+    }
+
+    /**
+     * 运行并发测试
+     * @param url        请求地址
+     * @param threadCount 并发线程数
+     * @param method        请求方式（GET / POST）
+     * @param params        请求参数（POST body 或 GET 查询参数）
+     * @param headers       请求头（可选）
+     * @param timeoutMillis 最大允许超时时间（毫秒）
+     * @param verbose       是否打印响应
+     * @return 统计结果
+     */
+    public HighConcurrencyResult highConcurrencyTestWithTimeoutMillis(String url,
+                                                                      int threadCount,
+                                                                      HttpMethod method,
+                                                                      Map<String, Object> params,
+                                                                      Map<String, String> headers,
+                                                                      long timeoutMillis,
+                                                                      boolean verbose) {
         ExecutorService executor = Executors.newFixedThreadPool(threadCount);
         List<Future<Long>> futures = new ArrayList<>();
         AtomicInteger successCount = new AtomicInteger();

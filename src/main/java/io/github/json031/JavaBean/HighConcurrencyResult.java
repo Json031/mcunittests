@@ -16,9 +16,9 @@ public class HighConcurrencyResult {
     @Override
     public String toString() {
         return "=== Load Test Result ===\n" +
-                "Total Requests: " + total + "\n" +
-                "Successful:     " + success + "\n" +
-                "Failed:         " + failed + "\n" +
-                "Avg Time (ms):  " + avgResponseTimeMillis;
+                "Total Requests: " + this.total + "\n" +
+                "Successful:     " + this.success + "\n" +
+                "Failed:         " + this.failed + "\n" +
+                "Avg Time (ms):  " + this.avgResponseTimeMillis;
     }
 }
