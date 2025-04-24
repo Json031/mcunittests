@@ -81,3 +81,6 @@ class YourProjectApplicationTests {
 }
 
 ```
+
+# License
+This library is licensed under the [MIT License](https://github.com/Json031/mcunittests/blob/main/LICENSE).
