@@ -7,6 +7,17 @@ mcunittests是SpringBoot项目的一个单元测试库，支持API接口自动�
 <br>Mcunittests is a unit testing library for the SpringBoot project that supports automated unit testing of API interfaces and high concurrency unit testing of API interfaces.
 
 # 最新版本 Latest version
+* 通过maven安装
+```xml
+<dependency>
+	<groupId>io.github.json031</groupId>
+	<artifactId>mcunittests</artifactId>
+	<version>1.0.1</version>
+	<scope>test</scope>
+</dependency>
+
+```
+
 * 通过GitHub Packages安装
  配置 Maven 仓库
 在项目的 `pom.xml` 文件的repositories中，添加 GitHub Packages 仓库配置：
@@ -38,17 +49,6 @@ mcunittests是SpringBoot项目的一个单元测试库，支持API接口自动�
     <username>your-github-username</username>
     <password>your-github-TOKEN</password>
   </server>
-```
-
-* 通过maven安装
-```xml
-<dependency>
-	<groupId>io.github.json031</groupId>
-	<artifactId>mcunittests</artifactId>
-	<version>1.0.1</version>
-	<scope>test</scope>
-</dependency>
-
 ```
 
 ## 示例代码 Example Codes
