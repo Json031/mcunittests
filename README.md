@@ -40,7 +40,7 @@ mcunittests是SpringBoot项目的一个单元测试库，支持API接口自动�
   <dependency>
     <groupId>io.github.json031</groupId>
     <artifactId>mcunittests</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.3</version>
   </dependency>
 ```
 
