@@ -3,8 +3,8 @@
 [![Java support](https://img.shields.io/badge/Java-8+-green?logo=java&logoColor=white)](https://openjdk.java.net/)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Json031/mcunittests/blob/main/LICENSE)
 <br>
-mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可下分发的开源项目。源代码可以在GitHub上找到。
-<br>mcunittests is a unit test library for SpringBoot project, and is an open source project distributed under the liberal MIT license. The source code is available on GitHub.
+mcunittests是SpringBoot项目的一个单元测试库，支持API接口自动化单元测试，API接口高并发单元测试。
+<br>Mcunittests is a unit testing library for the SpringBoot project that supports automated unit testing of API interfaces and high concurrency unit testing of API interfaces.
 
 # 最新版本 Latest version
 * 通过GitHub Packages安装
