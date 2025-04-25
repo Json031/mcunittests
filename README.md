@@ -72,15 +72,36 @@ class YourProjectApplicationTests {
 	@Test
 	public void testExampleApi() {
 		// 测试api接口地址 Replace with actual path
-		String apiUrl = "http://localhost:8088/json031/c/2a-d7b4-8005-a16f-8a95f07011df?id=2"; 
+		String apiUrl = "http://localhost:8088/json031/c/2a-d7b4-8005-a16f-8a95f07011df"; 
+		Map<String, Object> param = new HashMap<>();
+		param.put("id", 2);
 		//期望最慢响应时间 Expected slowest response time
 		long timeoutSeconds = 5;
-		mcApiTests.assertApiRespondsWithinTimeout(apiUrl, timeoutSeconds);
+		mcApiTests.assertApiRespondsWithinTimeout(apiUrl, HttpMethod.GET, param, null, timeoutSeconds, true);
 	}
 
+	@Test
+	public void testApiWithHighConcurrency() {
+		String apiUrl = "http://localhost:8088/json031/c/2a-d7b4-8005-a16f-8a95f07011df";  // 替换为实际路径
+		Map<String, Object> param = new HashMap<>();
+		param.put("id", 2);
+		long timeoutSecondsMillis = 1000;
+		int threadCount = 1000;
+		HighConcurrencyResult highConcurrencyResult = this.mcHighConcurrencyTests.highConcurrencyTestWithTimeoutMillis(apiUrl, threadCount, HttpMethod.GET, param, null, timeoutSecondsMillis, true);
+		System.out.print("highConcurrencyResult:" + highConcurrencyResult.toString());
+	}
+
+	@Test
+	public void testIsApiValidJson() {
+		String apiUrl = "http://localhost:8088/json031/c/2a-d7b4-8005-a16f-8a95f07011df"; // 替换为实际路径
+		Map<String, Object> param = new HashMap<>();
+		param.put("id", 2);
+		this.mcApiTests.testApiReturnsValidJson(apiUrl, HttpMethod.GET, param, null,  true);
+	}
 }
 
 ```
+![20250425110521902](https://github.com/user-attachments/assets/e8024cb3-d27f-46a6-9f01-be3ca6f96ef3)
 
 # License
 This library is licensed under the [MIT License](https://github.com/Json031/mcunittests/blob/main/LICENSE).
