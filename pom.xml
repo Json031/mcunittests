@@ -5,7 +5,7 @@
   <groupId>io.github.json031</groupId>
   <artifactId>mcunittests</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
   <name>mcunittests</name>
   <description>mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可下分发的开源项目</description>
   <url>https://github.com/Json031/mcunittests</url>
@@ -40,6 +40,11 @@
       <version>5.13.0-M2</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.15.0</version>
+    </dependency>
   </dependencies>
 
   <licenses>
@@ -58,7 +63,6 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
-  <!-- 只保留 GitHub Packages 配置 -->
   <distributionManagement>
     <repository>
       <id>github</id>

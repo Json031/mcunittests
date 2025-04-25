@@ -1,20 +1,20 @@
-package io.github.json031;
+package io.github.json031.apitests;
 
 import io.github.json031.JavaBean.HighConcurrencyResult;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.http.HttpMethod;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Supplier;
 
+/**
+ * This class is used for unit testing api High Concurrency.
+ */
 public class MCHighConcurrencyTests {
 
-    private final RestTemplate restTemplate = new RestTemplate();
     private final MCApiTests mcApiTests = new MCApiTests();
 
     /**

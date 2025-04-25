@@ -60,7 +60,7 @@ mcunittests是SpringBoot项目的一个单元测试库，支持API接口自动�
 
 ## 示例代码 Example Codes
 ```
-import io.github.json031.MCApiTests;
+import io.github.json031.apitests.MCApiTests;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

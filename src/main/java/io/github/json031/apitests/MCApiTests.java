@@ -1,15 +1,17 @@
-package io.github.json031;
+package io.github.json031.apitests;
 
+import io.github.json031.JavaBean.RequestUnitTestsResult;
+import io.github.json031.unittests.DataUnitTests;
+import io.github.json031.unittests.RequestUnitTests;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.http.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.time.Duration;
 import java.util.Map;
 
+/**
+ * This class is used for unit testing api.
+ */
 public class MCApiTests {
-
-    private final RestTemplate restTemplate = new RestTemplate();
 
     /**
      * 通用测试方法，验证给定 API 是否能在 timeout 秒内响应
@@ -48,54 +50,31 @@ public class MCApiTests {
                                                      Map<String, String> headers,
                                                      long timeoutMillis,
                                                      boolean verbose) {
-        try {
-            HttpHeaders httpHeaders = new HttpHeaders();
-            if (headers != null) {
-                headers.forEach(httpHeaders::set);
-            }
-
-            HttpEntity<?> entity;
-            String finalUrl = url;
-
-            if (method == HttpMethod.GET && params != null && !params.isEmpty()) {
-                // 拼接 GET 参数
-                StringBuilder queryBuilder = new StringBuilder(url);
-                queryBuilder.append(url.contains("?") ? "&" : "?");
-                params.forEach((key, value) -> queryBuilder.append(key).append("=").append(value).append("&"));
-                finalUrl = queryBuilder.substring(0, queryBuilder.length() - 1); // 去掉最后一个 &
-                entity = new HttpEntity<>(httpHeaders);
-            } else {
-                // POST 请求体（可为 null）
-                entity = new HttpEntity<>(params, httpHeaders);
-            }
-
-            long start = System.nanoTime();
-
-            ResponseEntity<String> response = restTemplate.exchange(
-                    finalUrl,
-                    method,
-                    entity,
-                    String.class
-            );
-
-            long end = System.nanoTime();
-            long durationMillis = (end - start) / 1_000_000;
-
-            if (verbose) {
-                System.out.println("API Response: " + response.getBody());
-                System.out.println("Response time: " + durationMillis + " ms");
-            }
-
-            if (durationMillis > timeoutMillis) {
-                Assertions.fail("API did not respond within " + timeoutMillis + " ms, url: " + finalUrl);
-            }
-
-            return durationMillis;
-
-        } catch (Exception e) {
-            Assertions.fail("API call failed for: " + url + " with error: " + e.getMessage());
-        }
-
-        return -1;
+        RequestUnitTestsResult result = RequestUnitTests.requestWitRestTemplate(url, method, params, headers, verbose);
+        return DataUnitTests.withinTimeOut(result, timeoutMillis);
     }
+
+    /**
+     * 通用测试方法，验证给定 API 是否返回有效json格式数据。
+     *
+     * @param url           完整的 API 地址（包括 http/https）
+     * @param method        请求方式（GET / POST）
+     * @param params        请求参数（POST body 或 GET 查询参数）
+     * @param headers       请求头（可选）
+     * @param verbose       是否打印响应
+     */
+    public void testApiReturnsValidJson(String url,
+                                        HttpMethod method,
+                                        Map<String, Object> params,
+                                        Map<String, String> headers,
+                                        boolean verbose) {
+        RequestUnitTestsResult result = RequestUnitTests.requestWitRestTemplate(url, method, params, headers, verbose);
+        if (result == null) {
+            Assertions.fail("API did not respond valid json, url: " + url);
+        } else {
+            ResponseEntity<String> response = result.response;
+            DataUnitTests.isValidJSON(response.getBody());
+        }
+    }
+
 }

@@ -1,9 +1,24 @@
 package io.github.json031.JavaBean;
 
+/**
+ * High Concurrency Result.
+ */
 public class HighConcurrencyResult {
+    /**
+     * total request times.
+     */
     public final int total;
+    /**
+     * request success times.
+     */
     public final int success;
+    /**
+     * request failed times.
+     */
     public final int failed;
+    /**
+     * request average cost timeMillis.
+     */
     public final long avgResponseTimeMillis;
 
     public HighConcurrencyResult(int total, int success, int failed, long avgResponseTimeMillis) {
