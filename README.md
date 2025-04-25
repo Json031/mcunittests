@@ -3,8 +3,8 @@
 [![Java support](https://img.shields.io/badge/Java-8+-green?logo=java&logoColor=white)](https://openjdk.java.net/)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Json031/mcunittests/blob/main/LICENSE)
 <br>
-mcunittests是一个Maven开源项目，专注于针对SpringBoot项目自动化单元测试库，支持API接口、API高并发及业务数据的自动化单元测试。
-<br>mcunittests is an open-source Maven project that focuses on automating unit testing libraries for the SpringBoot project, supporting API interfaces, high concurrency APIs, and automated unit testing of business data.
+**mcunittests**是一个Maven开源项目，专注于针对Java SpringBoot后端项目进行自动化单元测试，支持API接口、API高并发及业务数据的自动化单元测试。
+<br>**mcunittests** is an open-source Maven project focused on automated unit testing for Java Spring Boot backend projects. It supports automated unit testing for API endpoints, high-concurrency API scenarios, and business data validation.
 
 # 最新版本 Latest version
 * 方式1️⃣通过maven安装 Install through Maven
