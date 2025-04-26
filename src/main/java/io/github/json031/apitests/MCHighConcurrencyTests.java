@@ -56,9 +56,13 @@ public class MCHighConcurrencyTests {
                                                                       Map<String, String> headers,
                                                                       long timeoutMillis,
                                                                       boolean verbose) {
+        //create an executor to manager api request thread
         ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+        //the api request thread results
         List<Future<Long>> futures = new ArrayList<>();
+        //thread safe for logging success count
         AtomicInteger successCount = new AtomicInteger();
+        //thread safe for logging fail count
         AtomicInteger failCount = new AtomicInteger();
 
         for (int i = 0; i < threadCount; i++) {

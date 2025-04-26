@@ -73,8 +73,33 @@ public class MCApiTests {
             Assertions.fail("API did not respond valid json, url: " + url);
         } else {
             ResponseEntity<String> response = result.response;
-            DataUnitTests.isValidJSON(response.getBody());
+            DataUnitTests.isValidJSON(response);
         }
     }
 
+
+    /**
+     * 通用测试方法，验证 API 是否正常运行。
+     *
+     * @param url           完整的 API 地址（包括 http/https）
+     * @param method        请求方式（GET / POST）
+     * @param params        请求参数（POST body 或 GET 查询参数）
+     * @param headers       请求头（可选）
+     * @param verbose       是否打印响应
+     */
+    public void testApiHealth(String url,
+                              HttpMethod method,
+                              Map<String, Object> params,
+                              Map<String, String> headers,
+                              long timeoutMillis,
+                              boolean verbose) {
+        RequestUnitTestsResult result = RequestUnitTests.requestWitRestTemplate(url, method, params, headers, verbose);
+        if (result == null) {
+            Assertions.fail("API did not respond : " + url);
+        } else {
+            ResponseEntity<String> response = result.response;
+            DataUnitTests.isValidJSON(response);
+            DataUnitTests.withinTimeOut(result, timeoutMillis);
+        }
+    }
 }

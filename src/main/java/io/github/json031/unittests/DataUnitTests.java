@@ -3,6 +3,9 @@ package io.github.json031.unittests;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.json031.JavaBean.RequestUnitTestsResult;
 import org.junit.jupiter.api.Assertions;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 import java.net.URL;
 
@@ -13,17 +16,22 @@ public class DataUnitTests {
 
     /**
      * 验证是否为有效json格式数据。
-     * @param json        数据
+     * @param response     api请求结果
      * @return 是否为有效json格式数据。
      */
-    public static Boolean isValidJSON(String json) {
-        // 用 Jackson 尝试解析 JSON
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            mapper.readTree(json);  // 验证数据是否为合法JSON格式数据
-            return true;
-        } catch (Exception e) {
-            Assertions.fail("Invalid JSON data: " + json);
+    public static <T> Boolean isValidJSON(ResponseEntity<T> response) {
+        if (DataUnitTests.isJSONContentType(response)) {
+            String json = (String) response.getBody();
+            // 用 Jackson 尝试解析 JSON
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                mapper.readTree(json);  // 验证数据是否为合法JSON格式数据
+                return true;
+            } catch (Exception e) {
+                Assertions.fail("Invalid JSON data: " + json);
+                return false;
+            }
+        } else {
             return false;
         }
     }
@@ -69,4 +77,53 @@ public class DataUnitTests {
         }
     }
 
+    /**
+     * 获取getMediaType
+     * @param result     api请求结果
+     * @return MediaType
+     */
+    public static MediaType getMediaType(RequestUnitTestsResult result) {
+        return DataUnitTests.getMediaType(result.response);
+    }
+    /**
+     * 获取getMediaType
+     * @param response     api请求结果
+     * @return MediaType
+     */
+    public static <T> MediaType getMediaType(ResponseEntity<T> response) {
+        HttpHeaders responseHeaders = response.getHeaders();
+        MediaType contentType = responseHeaders.getContentType();
+        return contentType;
+    }
+    /**
+     * ContentType是否为application/json
+     * @param response     api请求结果
+     * @return Boolean 是否为application/json
+     */
+    public static <T> Boolean isJSONContentType(ResponseEntity<T> response) {
+        MediaType contentType = DataUnitTests.getMediaType(response);
+        return DataUnitTests.isJSONContentType(contentType);
+    }
+    /**
+     * ContentType是否为application/json
+     * @param result     api请求结果
+     * @return Boolean 是否为application/json
+     */
+    public static Boolean isJSONContentType(RequestUnitTestsResult result) {
+        MediaType contentType = DataUnitTests.getMediaType(result.response);
+        return DataUnitTests.isJSONContentType(contentType);
+    }
+    /**
+     * ContentType是否为application/json
+     * @param contentType   api请求结果response.headers.contentType
+     * @return Boolean 是否为application/json
+     */
+    public static Boolean isJSONContentType(MediaType contentType) {
+        if (contentType != null) {
+            if (MediaType.APPLICATION_JSON.includes(contentType)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
