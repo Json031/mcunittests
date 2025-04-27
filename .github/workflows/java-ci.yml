@@ -24,7 +24,7 @@ jobs:
         run: mvn clean install -Dgpg.skip=true
 
       - name: Run tests
-        run: mvn test
+        run: mvn clean test -Dgpg.skip=true
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
