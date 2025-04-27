@@ -1,4 +1,5 @@
 # mcunittests (MC Unit Tests)
+[![Build Status](https://github.com/json031/mcunittests/actions/workflows/mcunittests-java-ci.yml/badge.svg?branch=main)](https://github.com/json031/mcunittests/actions/workflows/mcunittests-java-ci.yml?query=branch%3Amain)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.json031/mcunittests?logo=apache-maven&logoColor=white)](https://search.maven.org/artifact/io.github.json031/mcunittests)
 [![Java support](https://img.shields.io/badge/Java-8+-green?logo=java&logoColor=white)](https://openjdk.java.net/)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Json031/mcunittests/blob/main/LICENSE)
