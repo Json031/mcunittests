@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -21,8 +20,14 @@ jobs:
           distribution: 'temurin'
           java-version: '8'
 
+      - name: Set up GPG keys
+        run: |
+          echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg.conf
+          echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
+
       - name: Build with Maven
-        run: mvn clean install -Dgpg.skip=true
+        run: mvn clean install -Dgpg.keyname=$GPG_PRIVATE_KEY -Dgpg.passphrase=$GPG_PASSPHRASE
 
       - name: Run tests
         run: mvn test
