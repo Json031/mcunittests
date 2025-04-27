@@ -5,7 +5,7 @@
   <groupId>io.github.json031</groupId>
   <artifactId>mcunittests</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.9</version>
+  <version>1.0.25</version>
   <name>mcunittests</name>
   <description>mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可下分发的开源项目</description>
   <url>https://github.com/Json031/mcunittests</url>
@@ -32,7 +32,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>6.0.13</version>
+      <version>5.3.30</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -56,7 +56,7 @@
   </licenses>
 
   <properties>
-    <java.version>20</java.version>
+    <java.version>1.8</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -101,8 +101,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
         </configuration>
       </plugin>
       <!-- 打包源码 -->
