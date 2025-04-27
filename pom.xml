@@ -140,9 +140,17 @@
         <version>0.8.7</version>
         <executions>
           <execution>
-            <phase>prepare-package</phase>
+            <id>prepare-agent</id>
+            <phase>initialize</phase>
             <goals>
               <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>generate-report</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>report</goal>
             </goals>
           </execution>
         </executions>
