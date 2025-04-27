@@ -20,6 +20,10 @@ jobs:
           distribution: 'temurin'
           java-version: '8'
 
+      - name: Debug GPG_PRIVATE_KEY
+        run: |
+          echo "$GPG_PRIVATE_KEY" | head -n 10
+
       - name: Set up GPG keys
         run: |
           echo "$GPG_PRIVATE_KEY" | gpg --batch --yes --import
