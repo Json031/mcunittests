@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class MCHighConcurrencyTests {
 
-    private final MCApiTests mcApiTests = new MCApiTests();
+    public MCApiTests mcApiTests = new MCApiTests();
 
     /**
      * 运行并发测试
