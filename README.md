@@ -1,6 +1,7 @@
 # mcunittests (MC Unit Tests)
 [![Build Status](https://github.com/Json031/mcunittests/actions/workflows/java-ci.yml/badge.svg?branch=main)](https://github.com/Json031/mcunittests/actions/workflows/java-ci.yml?query=branch%3Amain)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.json031/mcunittests?logo=apache-maven&logoColor=white)](https://search.maven.org/artifact/io.github.json031/mcunittests)
+![Codecov](https://img.shields.io/codecov/c/github/Json031/mcunittests?logo=Codecov)
 [![Java support](https://img.shields.io/badge/Java-8+-green?logo=java&logoColor=white)](https://openjdk.java.net/)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Json031/mcunittests/blob/main/LICENSE)
 <br>
