@@ -8,6 +8,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,8 +38,23 @@ public class DataUnitTestsTest {
         ResponseEntity<String> response = ResponseEntity.ok()
                 .headers(headers)
                 .body("{\"key\":\"value\"}");
+        RequestUnitTestsResult result = new RequestUnitTestsResult(0, response);
 
         assertTrue(DataUnitTests.isJSONContentType(response));
+        assertTrue(DataUnitTests.isJSONContentType(result));
+        assertTrue(DataUnitTests.getMediaType(result).equals(MediaType.APPLICATION_JSON));
+        assertTrue(DataUnitTests.withinTimeOut(null, 0) == -1);
+
+        //非JSON类型
+        MultiValueMap<String, Object> formData = new LinkedMultiValueMap<>();
+        formData.add("key", "value");
+        HttpHeaders headers2 = new HttpHeaders();
+        headers2.setContentType(MediaType.MULTIPART_FORM_DATA);
+        ResponseEntity<String> response2 = ResponseEntity.ok()
+                .headers(headers2)
+                .body(formData.toString());
+        //非JSON类型返回false
+        assertFalse(DataUnitTests.isValidJSON(response2));
     }
 
     @Test
@@ -50,7 +67,7 @@ public class DataUnitTestsTest {
     public void testRequestUnitTests() {
         String url = "https://www.baidu.com";
         // 调用请求方法
-        RequestUnitTestsResult result = RequestUnitTests.requestWitRestTemplate(url, HttpMethod.GET, null, null, true);
+        RequestUnitTestsResult result = RequestUnitTests.getInstance().requestWitRestTemplate(url, HttpMethod.GET, null, null, true);
 
         // 验证结果
         assertNotNull(result);
