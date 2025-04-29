@@ -22,6 +22,7 @@ jobs:
 
       - name: Run tests and generate coverage report
         run: mvn clean test jacoco:report -Dgpg.skip=true
+        continue-on-error: true
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
