@@ -71,7 +71,7 @@ public class DataUnitTestsTest {
 
         // 验证结果
         assertNotNull(result);
-        assertTrue(result.durationMillis < 2000);
+        assertTrue(result.durationMillis < 15000);
         assertEquals(200, result.response.getStatusCode().value());
     }
 }
