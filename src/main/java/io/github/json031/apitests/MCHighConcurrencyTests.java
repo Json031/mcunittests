@@ -1,6 +1,7 @@
 package io.github.json031.apitests;
 
 import io.github.json031.JavaBean.HighConcurrencyResult;
+import io.github.json031.MCUnitTests;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.http.HttpMethod;
 
@@ -69,9 +70,8 @@ public class MCHighConcurrencyTests {
             futures.add(executor.submit(() -> {
                 long start = System.nanoTime();
                 try {
-                    long rsptime = this.mcApiTests.assertApiRespondsWithinTimeoutMillis(url, method, params, headers, timeoutMillis, verbose); // 执行请求
-                    System.out.println("API Response time: " + rsptime);
-                    if (rsptime >= timeoutMillis) {
+                    boolean withinTimeoutMillis = this.mcApiTests.assertApiRespondsWithinTimeoutMillis(url, method, params, headers, timeoutMillis, verbose); // 执行请求
+                    if (!withinTimeoutMillis) {
                         failCount.incrementAndGet();
                     } else {
                         successCount.incrementAndGet();
@@ -87,7 +87,9 @@ public class MCHighConcurrencyTests {
         try {
             executor.awaitTermination(60, TimeUnit.SECONDS);
         } catch (Exception e) {
-            Assertions.fail("High concurrency test failed for url: " + url);
+            if (MCUnitTests.getInstance().verbose) {
+                System.out.print("High concurrency test failed for url: " + url);
+            }
         }
 
         long totalTime = 0;

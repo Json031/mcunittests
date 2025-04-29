@@ -43,7 +43,7 @@ public class DataUnitTestsTest {
         assertTrue(DataUnitTests.isJSONContentType(response));
         assertTrue(DataUnitTests.isJSONContentType(result));
         assertTrue(DataUnitTests.getMediaType(result).equals(MediaType.APPLICATION_JSON));
-        assertTrue(DataUnitTests.withinTimeOut(null, 0) == -1);
+        assertFalse(DataUnitTests.withinTimeOut(null, 0));
 
         //非JSON类型
         MultiValueMap<String, Object> formData = new LinkedMultiValueMap<>();

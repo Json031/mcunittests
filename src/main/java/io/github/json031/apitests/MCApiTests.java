@@ -1,6 +1,7 @@
 package io.github.json031.apitests;
 
 import io.github.json031.JavaBean.RequestUnitTestsResult;
+import io.github.json031.MCUnitTests;
 import io.github.json031.unittests.DataUnitTests;
 import io.github.json031.unittests.RequestUnitTests;
 import org.junit.jupiter.api.Assertions;
@@ -24,7 +25,7 @@ public class MCApiTests {
      * @param verbose       是否打印响应
      * @return 响应时间（毫秒）
      */
-    public long assertApiRespondsWithinTimeout(String url,
+    public boolean assertApiRespondsWithinTimeout(String url,
                                                HttpMethod method,
                                                Map<String, Object> params,
                                                Map<String, String> headers,
@@ -44,7 +45,7 @@ public class MCApiTests {
      * @param verbose       是否打印响应
      * @return 响应时间（毫秒）
      */
-    public long assertApiRespondsWithinTimeoutMillis(String url,
+    public boolean assertApiRespondsWithinTimeoutMillis(String url,
                                                      HttpMethod method,
                                                      Map<String, Object> params,
                                                      Map<String, String> headers,
@@ -63,17 +64,20 @@ public class MCApiTests {
      * @param headers       请求头（可选）
      * @param verbose       是否打印响应
      */
-    public void testApiReturnsValidJson(String url,
+    public boolean testApiReturnsValidJson(String url,
                                         HttpMethod method,
                                         Map<String, Object> params,
                                         Map<String, String> headers,
                                         boolean verbose) {
         RequestUnitTestsResult result = RequestUnitTests.requestWitRestTemplate(url, method, params, headers, verbose);
         if (result == null) {
-            Assertions.fail("API did not respond valid json, url: " + url);
+            if (MCUnitTests.getInstance().verbose) {
+                System.out.print("API did not respond valid json, url: " + url);
+            }
+            return false;
         } else {
             ResponseEntity<String> response = result.response;
-            DataUnitTests.isValidJSON(response);
+            return DataUnitTests.isValidJSON(response);
         }
     }
 
@@ -87,7 +91,7 @@ public class MCApiTests {
      * @param headers       请求头（可选）
      * @param verbose       是否打印响应
      */
-    public void testApiHealth(String url,
+    public boolean testApiHealth(String url,
                               HttpMethod method,
                               Map<String, Object> params,
                               Map<String, String> headers,
@@ -95,11 +99,15 @@ public class MCApiTests {
                               boolean verbose) {
         RequestUnitTestsResult result = RequestUnitTests.requestWitRestTemplate(url, method, params, headers, verbose);
         if (result == null) {
-            Assertions.fail("API did not respond : " + url);
+            if (MCUnitTests.getInstance().verbose) {
+                System.out.print("API did not respond : " + url);
+            }
+            return false;
         } else {
             ResponseEntity<String> response = result.response;
-            DataUnitTests.isValidJSON(response);
-            DataUnitTests.withinTimeOut(result, timeoutMillis);
+            boolean isValidJson = DataUnitTests.isValidJSON(response);
+            boolean isWithinTimeOut = DataUnitTests.withinTimeOut(result, timeoutMillis);
+            return isWithinTimeOut && isValidJson;
         }
     }
 }

@@ -2,6 +2,7 @@ package io.github.json031.unittests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.json031.JavaBean.RequestUnitTestsResult;
+import io.github.json031.MCUnitTests;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -28,7 +29,9 @@ public class DataUnitTests {
                 mapper.readTree(json);  // 验证数据是否为合法JSON格式数据
                 return true;
             } catch (Exception e) {
-                Assertions.fail("Invalid JSON data: " + json);
+                if (MCUnitTests.getInstance().verbose) {
+                    System.out.print("Invalid JSON data: " + json);
+                }
                 return false;
             }
         } else {
@@ -40,20 +43,20 @@ public class DataUnitTests {
      * 是否超出期望响应时间
      * @param result        api响应结果
      * @param timeoutMillis        期望响应时间
-     * @return 是否为有效json格式数据。
+     * @return 耗时是否超过期望值。
      */
-    public static long withinTimeOut(RequestUnitTestsResult result, long timeoutMillis) {
+    public static boolean withinTimeOut(RequestUnitTestsResult result, long timeoutMillis) {
         if (result == null) {
-            return -1;
+            return false;
         } else {
             long durationMillis = result.durationMillis;
-
-            // 耗时是否超过期望值，超过期望值则fail
             if (durationMillis > timeoutMillis) {
-                Assertions.fail("API did not respond within " + timeoutMillis + " ms");
+                if (MCUnitTests.getInstance().verbose) {
+                    System.out.print("API did not respond within " + timeoutMillis + " ms");
+                }
             }
-
-            return durationMillis;
+            // 耗时是否超过期望值
+            return durationMillis <= timeoutMillis;
         }
     }
 
@@ -68,11 +71,15 @@ public class DataUnitTests {
             String protocol = parsedUrl.getProtocol();
             Boolean isValidUrl = protocol.equals("http") || protocol.equals("https");
             if (!isValidUrl) {
-                Assertions.fail("Invalid URL: " + url);
+                if (MCUnitTests.getInstance().verbose) {
+                    System.out.print("Invalid URL: " + url);
+                }
             }
             return isValidUrl;
         } catch (Exception e) {
-            Assertions.fail("Invalid URL: " + url);
+            if (MCUnitTests.getInstance().verbose) {
+                System.out.print("Invalid URL: " + url);
+            }
             return false;
         }
     }
