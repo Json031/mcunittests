@@ -7,7 +7,10 @@
   <packaging>jar</packaging>
   <version>1.0.29</version>
   <name>mcunittests</name>
-  <description>mcunittests是SpringBoot项目的一个单元测试库，是一个在MIT许可下分发的开源项目</description>
+  <description>
+    mcunittests是一个Maven开源项目，专注于针对Java后端项目进行自动化单元测试，支持API接口、API高并发及业务数据的自动化单元测试。
+    mcunittests is an open-source Maven project focused on automated unit testing for Java backend projects. It supports automated unit testing for API endpoints, high-concurrency API scenarios, and business data validation.
+  </description>
   <url>https://github.com/Json031/mcunittests</url>
 
   <scm>
