@@ -84,23 +84,20 @@ public class MCHighConcurrencyTests {
         }
 
         executor.shutdown();
-        try {
-            executor.awaitTermination(60, TimeUnit.SECONDS);
-        } catch (Exception ignore) {
-        }
-
         long totalTime = 0;
         int completed = 0;
-        for (Future<Long> future : futures) {
-            try {
+        try {
+            executor.awaitTermination(60, TimeUnit.SECONDS);
+            for (Future<Long> future : futures) {
                 long time = future.get();
                 totalTime += time;
                 completed++;
-            } catch (Exception ignored) {
             }
+
+        } catch (Exception ignore) {
         }
 
-        long avg = completed > 0 ? totalTime / completed : -1;
+        long avg = totalTime / completed;
         return new HighConcurrencyResult(threadCount, successCount.get(), failCount.get(), avg);
     }
 }

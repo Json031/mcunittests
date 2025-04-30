@@ -106,7 +106,7 @@ public class MCApiTests {
         } else {
             ResponseEntity<String> response = result.response;
             boolean isValidContentType = true;
-            if (response.getHeaders().getContentType() == MediaType.APPLICATION_JSON) {
+            if (response.getHeaders().getContentType() == MediaType.APPLICATION_JSON || response.getHeaders().getContentType().getSubtype().equals(MediaType.APPLICATION_JSON.getSubtype())) {
                 isValidContentType = DataUnitTests.isValidJSON(response);
             }
             boolean isWithinTimeOut = DataUnitTests.withinTimeOut(result, timeoutMillis);

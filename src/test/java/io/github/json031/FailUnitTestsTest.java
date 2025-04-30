@@ -41,10 +41,10 @@ public class FailUnitTestsTest {
         String fakeUrl = "http://localhost:9999/non-existent-endpoint?wd=s";
         HttpMethod method = HttpMethod.GET;
         // 这个端口很可能没有服务运行，会连接失败从而抛出异常
-        Assertions.assertThrows(AssertionError.class, () -> {
-            Map<String, Object> param2 = new HashMap<>();
-            RequestUnitTests.requestWitRestTemplate(fakeUrl, method, param2, null, true);
-        });
+        Map<String, Object> param2 = new HashMap<>();
+        Assertions.assertNull(
+            RequestUnitTests.requestWitRestTemplate(fakeUrl, method, param2, null, true)
+        );
     }
 
     @Test
@@ -103,6 +103,7 @@ public class FailUnitTestsTest {
         assertFalse(mcApiTests.testApiReturnsValidJson("url", HttpMethod.GET, param, null, true));
         assertFalse(mcApiTests.testApiHealth(url, HttpMethod.GET, param, null, 1, true));
         assertFalse(mcApiTests.testApiHealth("url", HttpMethod.GET, param, null, 10000, true));
+        assertTrue(mcApiTests.testApiHealth("https://jsonplaceholder.typicode.com/posts/1", HttpMethod.GET, param, null, 10000, true));
     }
 
     @Test
