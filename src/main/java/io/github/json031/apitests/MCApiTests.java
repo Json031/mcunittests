@@ -105,9 +105,12 @@ public class MCApiTests {
             return false;
         } else {
             ResponseEntity<String> response = result.response;
-            boolean isValidJson = DataUnitTests.isValidJSON(response);
+            boolean isValidContentType = true;
+            if (response.getHeaders().getContentType() == MediaType.APPLICATION_JSON) {
+                isValidContentType = DataUnitTests.isValidJSON(response);
+            }
             boolean isWithinTimeOut = DataUnitTests.withinTimeOut(result, timeoutMillis);
-            return isWithinTimeOut && isValidJson;
+            return isWithinTimeOut && isValidContentType;
         }
     }
 }

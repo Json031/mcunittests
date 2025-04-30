@@ -86,10 +86,7 @@ public class MCHighConcurrencyTests {
         executor.shutdown();
         try {
             executor.awaitTermination(60, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            if (MCUnitTests.getInstance().verbose) {
-                System.out.print("High concurrency test failed for url: " + url);
-            }
+        } catch (Exception ignore) {
         }
 
         long totalTime = 0;
