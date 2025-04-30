@@ -87,17 +87,6 @@ public class FailUnitTestsTest {
         assertFalse(DataUnitTests.isValidUrl("ftp://invalid.com"));
         DataUnitTests dataUnitTests = new DataUnitTests();
 
-        MCUnitTests.getInstance().verbose = false;
-        HttpHeaders headers2 = new HttpHeaders();
-        headers2.setContentType(MediaType.APPLICATION_JSON);
-        ResponseEntity<String> response2 = ResponseEntity.ok()
-                .headers(headers2)
-                .body("key}");
-        RequestUnitTestsResult result2 = new RequestUnitTestsResult(10, response2);
-        assertFalse(DataUnitTests.isValidJSON(response2));
-        assertFalse(DataUnitTests.withinTimeOut(result2, 0));
-        assertFalse(DataUnitTests.isValidUrl("s"));
-        assertFalse(DataUnitTests.isValidUrl("ftp://invalid.com"));
         MediaType mediaType = null;
         assertFalse(DataUnitTests.isJSONContentType(mediaType));
     }
@@ -114,5 +103,14 @@ public class FailUnitTestsTest {
         assertFalse(mcApiTests.testApiReturnsValidJson("url", HttpMethod.GET, param, null, true));
         assertFalse(mcApiTests.testApiHealth(url, HttpMethod.GET, param, null, 1, true));
         assertFalse(mcApiTests.testApiHealth("url", HttpMethod.GET, param, null, 10000, true));
+    }
+
+    @Test
+    public void testVerbose() {
+        MCUnitTests.getInstance().verbose = false;
+        testRequestUnitTests();
+        testMCHighConcurrencyTests();
+        testDataUnitTests();
+        testMCApiTests();
     }
 }
