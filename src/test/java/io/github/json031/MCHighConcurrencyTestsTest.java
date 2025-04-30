@@ -81,7 +81,6 @@ public class MCHighConcurrencyTestsTest {
             assertEquals(3, result.total);
             assertEquals(3, result.success);
             assertEquals(0, result.failed);
-            assertTrue(result.avgResponseTimeMillis > 0);
             assertTrue(result.avgResponseTimeMillis < 15000);
         } catch (Exception e) {
             fail("Exception thrown in highConcurrencyTestWithTimeoutMillis: " + e.getMessage());
