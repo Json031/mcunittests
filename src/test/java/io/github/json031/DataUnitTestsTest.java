@@ -33,14 +33,9 @@ public class DataUnitTestsTest {
 
     @Test
     public void testIsJSONContentType_ResponseEntity() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        ResponseEntity<String> response = ResponseEntity.ok()
-                .headers(headers)
-                .body("{\"key\":\"value\"}");
-        RequestUnitTestsResult result = RequestUnitTestsResult.testSuccessResult(0, response, "","GET");
+        RequestUnitTestsResult result = RequestUnitTestsResult.testJsonResult(0, "","{\"key\":\"value\"}", "GET");
 
-        assertTrue(DataUnitTests.isJSONContentType(response));
+        assertTrue(DataUnitTests.isJSONContentType(result.response));
         assertTrue(DataUnitTests.isJSONContentType(result));
         assertTrue(DataUnitTests.getMediaType(result).equals(MediaType.APPLICATION_JSON));
         assertFalse(DataUnitTests.withinTimeOut(null, 0));
