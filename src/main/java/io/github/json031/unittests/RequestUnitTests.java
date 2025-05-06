@@ -1,7 +1,6 @@
 package io.github.json031.unittests;
 
 import io.github.json031.JavaBean.RequestUnitTestsResult;
-import org.junit.jupiter.api.Assertions;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
