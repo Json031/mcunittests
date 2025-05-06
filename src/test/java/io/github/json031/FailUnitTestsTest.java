@@ -75,13 +75,8 @@ public class FailUnitTestsTest {
 
     @Test
     public void testDataUnitTests() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        ResponseEntity<String> response = ResponseEntity.ok()
-                .headers(headers)
-                .body("key}");
-        RequestUnitTestsResult result = RequestUnitTestsResult.testSuccessResult(10, response, "","GET");
-        assertFalse(DataUnitTests.isValidJSON(response));
+        RequestUnitTestsResult result = RequestUnitTestsResult.testJsonResult(10,"", "key}","GET");
+        assertFalse(DataUnitTests.isValidJSON(result.response));
         assertFalse(DataUnitTests.withinTimeOut(result, 0));
         assertFalse(DataUnitTests.isValidUrl("s"));
         assertFalse(DataUnitTests.isValidUrl("ftp://invalid.com"));

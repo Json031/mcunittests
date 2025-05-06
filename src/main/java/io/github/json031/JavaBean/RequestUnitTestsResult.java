@@ -1,5 +1,7 @@
 package io.github.json031.JavaBean;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import java.time.Instant;
@@ -59,6 +61,10 @@ public class RequestUnitTestsResult {
         this.threadId = threadId;
     }
 
+
+    /**
+     * Tests Result
+     */
     public static RequestUnitTestsResult testSuccessResult(
             long durationMillis,
             ResponseEntity<String> response,
@@ -78,5 +84,30 @@ public class RequestUnitTestsResult {
                 Instant.now(),
                 0);
         return testSuccessResult;
+    }
+    public static RequestUnitTestsResult testJsonResult(
+            long durationMillis,
+            String requestUrl,
+            String json,
+            String method
+    ) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        ResponseEntity<String> response = ResponseEntity.ok()
+                .headers(headers)
+                .body(json);
+        RequestUnitTestsResult testJsonResult = new RequestUnitTestsResult(
+                durationMillis,
+                response,
+                200,
+                true,
+                "",
+                requestUrl,
+                method,
+                0,
+                Instant.now(),
+                Instant.now(),
+                0);
+        return testJsonResult;
     }
 }
