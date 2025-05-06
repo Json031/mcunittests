@@ -42,8 +42,8 @@ public class FailUnitTestsTest {
         HttpMethod method = HttpMethod.GET;
         // 这个端口很可能没有服务运行，会连接失败从而抛出异常
         Map<String, Object> param2 = new HashMap<>();
-        Assertions.assertNull(
-            RequestUnitTests.requestWitRestTemplate(fakeUrl, method, param2, null, true)
+        Assertions.assertFalse(
+            RequestUnitTests.requestWitRestTemplate(fakeUrl, method, param2, null, true).isSuccess
         );
     }
 
@@ -80,7 +80,7 @@ public class FailUnitTestsTest {
         ResponseEntity<String> response = ResponseEntity.ok()
                 .headers(headers)
                 .body("key}");
-        RequestUnitTestsResult result = new RequestUnitTestsResult(10, response);
+        RequestUnitTestsResult result = RequestUnitTestsResult.testSuccessResult(10, response, "","GET");
         assertFalse(DataUnitTests.isValidJSON(response));
         assertFalse(DataUnitTests.withinTimeOut(result, 0));
         assertFalse(DataUnitTests.isValidUrl("s"));

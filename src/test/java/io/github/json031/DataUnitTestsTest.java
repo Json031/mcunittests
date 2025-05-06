@@ -38,7 +38,7 @@ public class DataUnitTestsTest {
         ResponseEntity<String> response = ResponseEntity.ok()
                 .headers(headers)
                 .body("{\"key\":\"value\"}");
-        RequestUnitTestsResult result = new RequestUnitTestsResult(0, response);
+        RequestUnitTestsResult result = RequestUnitTestsResult.testSuccessResult(0, response, "","GET");
 
         assertTrue(DataUnitTests.isJSONContentType(response));
         assertTrue(DataUnitTests.isJSONContentType(result));

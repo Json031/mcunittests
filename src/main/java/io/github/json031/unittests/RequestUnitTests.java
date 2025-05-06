@@ -8,6 +8,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.Map;
 
 /**
@@ -56,48 +58,76 @@ public class RequestUnitTests {
                                                              boolean verbose) {
         //校验 URL 是否合法
         if (DataUnitTests.isValidUrl(url)) {
+            HttpHeaders httpHeaders = new HttpHeaders();
+            if (headers != null) {
+                headers.forEach(httpHeaders::set);
+            }
+
+            // 请求体
+            HttpEntity<?> entity;
+            // 请求地址
+            String finalUrl = url;
+
+            if (method == HttpMethod.GET && params != null && !params.isEmpty()) {
+                // 拼接 GET 参数
+                StringBuilder queryBuilder = new StringBuilder(url);
+                queryBuilder.append(url.contains("?") ? "&" : "?");
+                params.forEach((key, value) -> queryBuilder.append(key).append("=").append(value).append("&"));
+                finalUrl = queryBuilder.substring(0, queryBuilder.length() - 1); // 去掉最后一个 &
+                entity = new HttpEntity<>(httpHeaders);
+            } else {
+                // POST 请求体（可为 null）
+                entity = new HttpEntity<>(params, httpHeaders);
+            }
+
+            Instant startTime = Instant.now();
+            long startNano = System.nanoTime();
+
+            ResponseEntity<String> response = null;
+            String errorMessage = null;
+            int statusCode = 0;
+            boolean isSuccess = false;
+            int responseSizeBytes = 0;
+            String methodStr = method.name();
+            long threadId = Thread.currentThread().getId();
+
             try {
-                HttpHeaders httpHeaders = new HttpHeaders();
-                if (headers != null) {
-                    headers.forEach(httpHeaders::set);
+                response = INSTANCE.restTemplate.exchange(finalUrl, method, entity, String.class);
+
+                if (response != null) {
+                    statusCode = response.getStatusCodeValue();
+                    isSuccess = response.getStatusCode().is2xxSuccessful();
+                    if (response.getBody() != null) {
+                        responseSizeBytes = response.getBody().getBytes(StandardCharsets.UTF_8).length;
+                    }
                 }
-
-                // 请求体
-                HttpEntity<?> entity;
-                // 请求地址
-                String finalUrl = url;
-
-                if (method == HttpMethod.GET && params != null && !params.isEmpty()) {
-                    // 拼接 GET 参数
-                    StringBuilder queryBuilder = new StringBuilder(url);
-                    queryBuilder.append(url.contains("?") ? "&" : "?");
-                    params.forEach((key, value) -> queryBuilder.append(key).append("=").append(value).append("&"));
-                    finalUrl = queryBuilder.substring(0, queryBuilder.length() - 1); // 去掉最后一个 &
-                    entity = new HttpEntity<>(httpHeaders);
-                } else {
-                    // POST 请求体（可为 null）
-                    entity = new HttpEntity<>(params, httpHeaders);
-                }
-
-                long start = System.nanoTime();
-
-                ResponseEntity<String> response = INSTANCE.restTemplate.exchange(finalUrl, method, entity, String.class);
-
-                long end = System.nanoTime();
-                // 毫秒级耗时
-                long durationMillis = (end - start) / 1_000_000;
 
                 if (verbose) {
-                    System.out.println("API Response: " + response.getBody());
-                    System.out.println("Response time: " + durationMillis + " ms");
+                    System.out.println("API Response: " + (response != null ? response.getBody() : "null"));
                 }
 
-                RequestUnitTestsResult requestUnitTestsResult = new RequestUnitTestsResult(durationMillis, response);
-                return requestUnitTestsResult;
-
             } catch (Exception e) {
-                System.out.println("API call failed for: " + url + " with error: " + e.getMessage());
+                errorMessage = e.getMessage();
+                System.out.println("API call failed for: " + url + " with error: " + errorMessage);
             }
+
+            long endNano = System.nanoTime();
+            long durationMillis = (endNano - startNano) / 1_000_000;
+            Instant endTime = Instant.now();
+
+            return new RequestUnitTestsResult(
+                    durationMillis,
+                    response,
+                    statusCode,
+                    isSuccess,
+                    errorMessage,
+                    finalUrl,
+                    methodStr,
+                    responseSizeBytes,
+                    startTime,
+                    endTime,
+                    threadId
+            );
         }
 
         return null;

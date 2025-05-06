@@ -14,7 +14,7 @@
 <dependency>
 	<groupId>io.github.json031</groupId>
 	<artifactId>mcunittests</artifactId>
-	<version>1.0.30</version>
+	<version>1.0.31</version>
 	<scope>test</scope>
 </dependency>
 
@@ -42,7 +42,7 @@
   <dependency>
     <groupId>io.github.json031</groupId>
     <artifactId>mcunittests</artifactId>
-    <version>1.0.30</version>
+    <version>1.0.31</version>
   </dependency>
 ```
 
