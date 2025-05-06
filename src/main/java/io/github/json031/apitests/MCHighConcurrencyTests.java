@@ -1,8 +1,6 @@
 package io.github.json031.apitests;
 
 import io.github.json031.JavaBean.HighConcurrencyResult;
-import io.github.json031.MCUnitTests;
-import org.junit.jupiter.api.Assertions;
 import org.springframework.http.HttpMethod;
 
 import java.util.ArrayList;
