@@ -1,9 +1,10 @@
 # mcunittests (MC Unit Tests)
 [![Build Status](https://github.com/Json031/mcunittests/actions/workflows/java-ci.yml/badge.svg?branch=main)](https://github.com/Json031/mcunittests/actions/workflows/java-ci.yml?query=branch%3Amain)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.json031/mcunittests?logo=apache-maven&logoColor=white)](https://search.maven.org/artifact/io.github.json031/mcunittests)
-![Codecov](https://img.shields.io/codecov/c/github/Json031/mcunittests?logo=Codecov)
+![Codecov](https://codecov.io/github/json031/mcunittests/coverage.svg?branch=main)
 [![Java support](https://img.shields.io/badge/Java-8+-green?logo=java&logoColor=white)](https://openjdk.java.net/)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Json031/mcunittests/blob/main/LICENSE)
+![Codecov](https://img.shields.io/codecov/c/github/Json031/mcunittests?logo=Codecov)
 <br>
 **mcunittests**是一个Maven开源项目，专注于针对Java后端项目进行自动化单元测试，支持API接口、API高并发及业务数据的自动化单元测试。
 <br>**mcunittests** is an open-source Maven project focused on automated unit testing for Java backend projects. It supports automated unit testing for API endpoints, high-concurrency API scenarios, and business data validation.
